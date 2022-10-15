@@ -10,18 +10,20 @@
     <div class="shape"></div>
     <div class="shape"></div>
 </div>
-<form action="/" method="post" >
+<form action="/register" method="post">
     <a href="/"><h3>Sign in</h3></a>
     <a href="/register"><h3> Sign Up </h3> </a>
 
     <label for="username">Username</label>
-    <input type="text" placeholder="Enter your user name" id="username" name="username">
+    <input type="text" placeholder="Enter your user name" id="username" name="username" >
 
     <label for="password">Password</label>
-    <input type="password" placeholder="Password" id="password" name="password">
-    <label class="error-login"> </label>
-    <button id="btn-login" name="btn-login" >Log In</button>
+    <input type="password" placeholder="Password" id="password" name="username">
+
+    <label for="confirmpassword">Confirm Password</label>
+    <input type="password" placeholder=" Confirm Password" id="confirmpassword", name="confirmpassword">
+    <label class="error-register"> </label>
+    <button id="btn-register" name="btn-register" >Register</button>
 </form>
 </body>
 </html>
-

@@ -11,6 +11,7 @@ class Authentication
         let pass = req.body.password
 
         loginModel.userLogin(username, pass).then( (result) => {
+
             if (result.rowCount > 0)
             {
                 res.cookie(tokenName,jwt.sign(
