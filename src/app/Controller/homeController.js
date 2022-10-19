@@ -4,7 +4,7 @@ class homeController{
     getHome(req,res){
 
         adminModel.getProForCust().then((result) => {
-            res.render('home.ejs',{proList: result, isLogin:req.login})
+            res.render('homePage.ejs',{proList: result, isLogin:req.login})
         })
 
     }
