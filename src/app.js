@@ -25,7 +25,7 @@ app.use(cookieParser())
 
 //Template engine
 app.set('view engine', 'ejs')
-app.set('views', path.join(__dirname, 'app/View'))
+app.set('views', path.join(__dirname, 'app/view'))
 
 //Rout init
 indexRoute(app)
