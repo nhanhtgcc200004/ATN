@@ -1,0 +1,113 @@
+<div class="root-product" style="text-align: center">
+    <div style="width: 100%;height: 4rem; position: fixed; z-index: 1;">
+        <nav class="navbar" style="transform: translateX(60%);">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="d-flex" id="search_box_product" role="search">
+                        <input class="form-control me-2" id="txt_search_pro" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" id="btn_search_product">Search</button>
+                        <button class="btn btn-success" id="btn_new_product" data-bs-toggle="modal" data-bs-target="#new_pro_model" style="width: 8rem;margin-left: 2rem">New</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+<div style="padding-top: 2rem;" id="body_product">
+<% for (let i=0;i<proList.length;i++) {%>
+<div class="page-wrapper">
+    <div class="page-inner">
+        <div class="">
+            <div class="col-3">
+            <div class="el-wrapper">
+                <div class="box-up">
+                    <img class="img" src="/image/<%= proList[i].pro_image %>" alt="">
+                    <div class="img-info">
+                        <div class="info-inner">
+                            <span class="p-company">Category: <%= proList[i].cat_name %></span>
+                            <span class="p-company">Supplier: <%= proList[i].supplier_name %></span>
+                            <span class="p-company">Quantity: <%= proList[i].quantity %></span>
+                        </div>
+                        <div class="a-size">Price : <span class="size">$<%= proList[i].price %></span></div>
+                    </div>
+                </div>
+                <div class="box-down">
+                    <div class="h-bg">
+                        <div class="h-bg-inner"></div>
+                    </div>
+                    <a class="cart">
+                        <span class="price"><%= proList[i].pro_name %></span>
+                        <span class="add-to-cart">
+                            <div class="btn-group">
+              <span class="txt"><button class="btn btn-warning btn-edit-pro" data-pro-id="<%= proList[i].pro_id %>">Edit</button></span>
+              <span class="txt"><button class="btn btn-danger btn-delete-pro" data-bs-toggle="modal" data-bs-target="#confirm_delete" data-pro-id="<%= proList[i].pro_id %>">Delete</button></span>
+                                </div>
+            </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+<%}%>
+</div>
+</div>
+<!-- model-->
+<div class="modal fade" id="new_pro_model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog  modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="title_model_pro">Add product</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div style="padding:1rem">
+                <form action="/product-add" method="post" id="pro_form">
+                    <div class="mb-4">
+                        <label for="pro_name" class="form-label">Name</label>
+                        <input type="text" name="proName" class="form-control" id="pro_name" placeholder="product name" style="display: inline-block" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="pro_cate" class="form-label">Category</label>
+                        <select class="form-control" name="cateId" id="pro_cate" style="display: inline-block" required>
+                            <option value="">Choose category</option>
+                            <% for (let i=0;i<cateList.length;i++){ %>
+                                <option value="<%= cateList[i].cat_id %>"><%= cateList[i].cat_name %></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="pro_sup" class="form-label">Supplier</label>
+                        <select class="form-control" name="supId" id="pro_sup" style="display: inline-block" required>
+                            <option value="">Choose supplier</option>
+                            <% for (let i=0;i<supList.length;i++){ %>
+                                <option value="<%= supList[i].supplier_id %>"><%= supList[i].supplier_name %></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="pro_price" class="form-label">Price</label>
+                        <input type="number" name="price" class="form-control" id="pro_price" placeholder="price" style="display: inline-block" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="pro_quantity" class="form-label">Quantity</label>
+                        <input type="number" name="quantity" class="form-control" id="pro_quantity" placeholder="quantity" style="display: inline-block" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="img_preview" class="form-label" id="lb_img">Image</label>
+                        <div style="display: block">
+                            <img src="/image/demo-img.png" alt="..." class="img-thumbnail" id="img_preview" style="width: 13rem;" >
+                        </div>
+                        <input type="file" name="proImage" id="pro_img" hidden>
+                        <button type="button" class="btn btn-primary mt-3" id="btn_open_dialog_image">Choose image</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="btn_add_pro">Add</button>
+                        <input type="hidden" id="pro_id" name="proId" value="">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<button class="btn btn-success" id="btn_open_update_pro_form" data-bs-toggle="modal" data-bs-target="#new_pro_model" hidden></button>

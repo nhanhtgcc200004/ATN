@@ -9,10 +9,10 @@ class registerModel{
     }
     createaccount(username,password,role){
         const insaccount= async ()=> {
-            let result= await database.query(`insert into account(username,password,role)values ('${username}','${password}',${role})`)
+            let result= await database.query(`insert into account(username,password,role) values ('${username}','${password}','${role}')`)
+            return result.rowCount
         }
-
-
+        return insaccount()
     }
 }
-module.exports=new registerModel()
+module.exports = new registerModel

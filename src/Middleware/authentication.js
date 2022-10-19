@@ -11,17 +11,17 @@ class Authentication
         let pass = req.body.password
 
         loginModel.userLogin(username, pass).then( (result) => {
-
             if (result.rowCount > 0)
             {
                 res.cookie(tokenName,jwt.sign(
                     {
                         userId:result.rows[0].user_id,
-                        shopId:result.rows[0].shop_id
+                        shopId:result.rows[0].shop_id,
+                        role:result.rows[0].role,
                     },
                     tokenKey)
                 )
-                res.send({status:200, shopId:result.rows[0].shop_id})
+                res.send({status:200, role:result.rows[0].role})
             }
             else
             {
@@ -37,48 +37,45 @@ class Authentication
             let decode = jwt.verify(token, tokenKey)
             req.userId = decode.userId
             req.shopId = decode.shopId
-            if(req.shopId){
-                next()
+            req.role = decode.role
+            if(req.role !== '1'){
+                res.render('authFail.ejs')
             } else {
-                res.render('newShop.ejs')
+                next()
             }
         }catch (error){
             res.render('authFail.ejs')
         }
     }
 
-    handleCreateShop(req, res){
-        console.log(req.body)
-        let token = req.cookies.ath_token
-        let decode = jwt.verify(token, tokenKey)
-        req.userId = decode.userId
-
-        let shopName = req.body.shopName
-        let address = req.body.address
-        const handle = async() => {
-            const shop = await indexModel.addShop(shopName, address)
-            if(shop.rowCount !== 0){
-                let shopId = shop[0].shop_id
-                const updateShopForAdmin = await indexModel.addShopForAdmin(shopId, req.userId)
-                if(updateShopForAdmin.rowCount !== 0){
-                    res.cookie(tokenName,jwt.sign(
-                        {
-                            userId: req.userId,
-                            shopId: shopId
-                        },
-                        tokenKey)
-                    )
-                    res.send({status:200, mess: 'create shop success'})
-                } else {
-                    console.log('fail')
-                    res.send({status:200, mess: 'create shop fail'})
-                }
+    checkCookieSeniorAdmin(req, res, next)
+    {
+        try{
+            let token = req.cookies.__token
+            let decode = jwt.verify(token, tokenKey)
+            req.userId = decode.userId
+            req.shopId = decode.shopId
+            req.role = decode.role
+            if(req.role !== '2'){
+                res.render('authFail.ejs')
             } else {
-
-                res.send({status:200, mess: 'create shop fail'})
+                next()
             }
+        }catch (error){
+            res.render('authFail.ejs')
         }
-        handle()
+    }
+
+    checkLoginCust(req, res, next){
+        try{
+            let token = req.cookies.__token
+            let decode = jwt.verify(token, tokenKey)
+            req.login = true
+            next()
+        }catch (error){
+            req.login = false
+            next()
+        }
     }
 }
 

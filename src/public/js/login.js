@@ -1,12 +1,10 @@
 $(document).ready(function (){
     const appLogin = {
         eventListener: function (){
-            $('#btn_login').click(function (){
+            $('#login_form').submit(function (e){
+                e.preventDefault()
                 appLogin.handleLogin()
             })
-        },
-        animation: function (){
-
         },
         handleLogin: function (){
             let username = $('#username').val()
@@ -14,15 +12,22 @@ $(document).ready(function (){
             if(username !== '' && password !== '')
             {
                 $.ajax({
-                    url:'/login',
+                    url:'/',
                     type: 'POST',
                     beforeSend: appLogin.animation(),
                     data: {username, password},
                     success: function (data){
                         if(data.status === 200){
-                            location.href = '/home'
+                            if(data.role === '0'){
+                                location.href = '/home'
+                            } else if(data.role === '1') {
+                                location.href = '/dashboard-admin'
+                            } else {
+                                location.href = '/dashboard-senior'
+                            }
                         } else {
                             appLogin.animation()
+                            $('.error-login').html("username and password wrong")
                             $('.error-login').show()
                         }
                     },
@@ -31,6 +36,20 @@ $(document).ready(function (){
                         alert('error')
                     }
                 })
+            }
+            else {
+                $('.error-login').html("please enter username and password")
+                $('.error-login').show()
+            }
+        },
+        animation: function (){
+            if($('.overplay-animation').css('display') == 'none')
+            {
+                $('.overplay-animation').css('display', 'block')
+            }
+            else
+            {
+                $('.overplay-animation').css('display', 'none')
             }
         },
         run: function (){
