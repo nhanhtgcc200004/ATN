@@ -17,6 +17,7 @@ function indexRoute(app){
     //client
     app.get("/home", authentication.checkLoginCust, homeController.getHome)
     app.get("/cust-search-pro/:name",homeController.custSearchPro)
+    app.get("/product/detail/:id",homeController.getDetail)
 
     //register
     app.get("/register",registerController.register)

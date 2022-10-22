@@ -35,11 +35,9 @@ $(document).ready(function (){
                         <img src="/image/${proList[i].pro_image}" alt="image" width="250" height="250">
                         <div style="text-align: left">
                             <p id="pro_name">Name: ${proList[i].pro_name} </p>
-                            <p id="cate_name">Category:  ${proList[i].cat_name}</p>
+                        
                             <p id="pro_price">Price: $${proList[i].price}</p>
-                            <p id="sup_name">Supplier: ${proList[i].supplier_name} </p>
-                            <p id="shop_name">Shop: ${proList[i].shop_name }</p>
-                            <p id="pro_quantity">Quantity: ${proList[i].quantity} </p>
+                         
                         </div>
                     </div>`
                 proListHTML += proHTML

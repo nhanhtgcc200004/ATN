@@ -48,19 +48,19 @@ function clearText(field)
             <button class="btn btn-outline-warning" id="btn_search_product" style="transform: translateY(-2px);">Search</button>
         </div>
         <div id="body_pro_list">
-            <% for (let i=0;i< proList.length;i++){ %>
-                <div class="ads_250_250" style="margin-bottom: 2rem; margin-left: 1rem">
-                    <img src="/image/<%= proList[i].pro_image %>" alt="image" width="250" height="250">
-                    <div style="text-align: left">
-                        <p id="pro_name">Name: <%= proList[i].pro_name %></p>
-                        <p id="cate_name">Category: <%= proList[i].cat_name %></p>
-                        <p id="pro_price">Price: $<%= proList[i].price %></p>
-                        <p id="sup_name">Supplier: <%= proList[i].supplier_name %> </p>
-                        <p id="shop_name">Shop: <%= proList[i].shop_name %></p>
-                        <p id="pro_quantity">Quantity: <%= proList[i].quantity %></p>
+            <% if(detail){ %>
+                <%- include('detail.ejs') %>
+            <% }else {%>
+                <% for (let i=0;i< proList.length;i++){ %>
+                    <div class="ads_250_250" style="margin-bottom: 2rem; margin-left: 1rem">
+                        <a href="/product/detail/<%= proList[i].pro_id%>"><img src="/image/<%= proList[i].pro_image %>" alt="image" width="250" height="250"></a>
+                        <div style="text-align: left">
+                            <p id="pro_name">Name: <%= proList[i].pro_name %></p>
+                            <p id="pro_price">Price: $<%= proList[i].price %></p>
+                        </div>
                     </div>
-                </div>
-            <% } %>
+                <% } %>
+            <%}%>
         </div>
     </div>
 
