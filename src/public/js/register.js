@@ -6,16 +6,6 @@ $(document).ready(function () {
                 appRegister.handleRegister()
             })
         },
-        animation: function () {
-            if($('.overplay-animation').css('display') == 'none')
-            {
-                $('.overplay-animation').css('display', 'block')
-            }
-            else
-            {
-                $('.overplay-animation').css('display', 'none')
-            }
-        },
         handleRegister: function () {
             let username = $('#username').val()
             let password = $('#password').val()
@@ -25,22 +15,18 @@ $(document).ready(function () {
                     $.ajax({
                         url: '/register',
                         type: 'post',
-                        beforeSend: appRegister.animation(),
                         data: {username, password},
                         success: function (data) {
                             if (data.status === 200) {
-                                appRegister.animation();
                                $('.error-register').html("register success")
                                 $('.error-register').css('color','green')
                                 $('.error-register').show()
                             } else {
-                                appRegister.animation()
                                 $('.error-register').html("this user name was exist")
                                 $('.error-register').show()
                             }
                         },
                         error: function () {
-                            appRegister.animation()
                             alert('error')
                         }
                     })
