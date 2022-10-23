@@ -7,7 +7,14 @@ $(document).ready(function () {
             })
         },
         animation: function () {
-
+            if($('.overplay-animation').css('display') == 'none')
+            {
+                $('.overplay-animation').css('display', 'block')
+            }
+            else
+            {
+                $('.overplay-animation').css('display', 'none')
+            }
         },
         handleRegister: function () {
             let username = $('#username').val()
