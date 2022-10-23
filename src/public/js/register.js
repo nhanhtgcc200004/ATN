@@ -29,6 +29,7 @@ $(document).ready(function () {
                         data: {username, password},
                         success: function (data) {
                             if (data.status === 200) {
+                                appRegister.animation();
                                $('.error-register').html("register success")
                                 $('.error-register').css('color','green')
                                 $('.error-register').show()
