@@ -12,7 +12,6 @@ class SeniorController{
     newShop(req, res){
         let shopName = req.body.shopName
         let address = req.body.address
-        console.log(req.body)
         seniorModel.addNewShop(shopName, address).then((result) =>{
             if(result.length !== 0){
                 res.send({status:200, notification:'insert shop success'})

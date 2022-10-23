@@ -66,7 +66,6 @@ $(document).ready(function (){
                 data: {shopId, shopName, address},
                 beforeSend: appShop.animation(),
                 success: function (data){
-                    console.log(data)
                     if(data.status === 200){
                         location.href = '/dashboard-senior'
                     } else {
