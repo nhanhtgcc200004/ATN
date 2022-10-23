@@ -87,7 +87,6 @@ $(document).ready(function (){
         },
         updatePro: function (product){
             var proForm = new FormData(product)
-            console.log('here')
             $.ajax({
                 url: '/product/edit',
                 type: 'PUT',
