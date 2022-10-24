@@ -12,7 +12,7 @@ $(document).ready(function (){
             if(username !== '' && password !== '')
             {
                 $.ajax({
-                    url:'/',
+                    url:'/login',
                     type: 'POST',
                     beforeSend: appLogin.animation(),
                     data: {username, password},
