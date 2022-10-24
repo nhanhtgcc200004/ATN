@@ -19,7 +19,7 @@ $(document).ready(function (){
                     success: function (data){
                         if(data.status === 200){
                             if(data.role === '0'){
-                                location.href = '/home'
+                                location.href = '/'
                             } else if(data.role === '1') {
                                 location.href = '/dashboard-admin'
                             } else {

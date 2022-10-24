@@ -10,12 +10,12 @@ const upload = require("../Middleware/upload");
 function indexRoute(app){
 
     //login
-    app.get("/",loginController.getLogin)
-    app.post("/", authentication.checkLogin)
+    app.get("/login",loginController.getLogin)
+    app.post("/login", authentication.checkLogin)
     app.get("/logout", loginController.logout)
 
     //client
-    app.get("/home", authentication.checkLoginCust, homeController.getHome)
+    app.get("/", authentication.checkLoginCust, homeController.getHome)
     app.get("/cust-search-pro/:name",homeController.custSearchPro)
     app.get("/product/detail/:id",homeController.getDetail)
 
